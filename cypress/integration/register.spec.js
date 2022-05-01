@@ -1,6 +1,21 @@
 /// < reference types="Cypress"/>
+import { faker } from '@faker-js/faker';
 
 describe('test register',() => {
+
+    let registerData = {
+        firstName:'',
+        lastName:'',
+        randomEmail:'',
+        password:''
+    }
+
+    beforeEach( () => {
+        registerData.firstName = faker.name.firstName();
+        registerData.lastName = faker.name.lastName();
+        registerData.randomEmail = faker.internet.email();
+        registerData.password = faker.internet.password();
+    })
 
     it('registration attempt without first name', () => {
         cy.visit('/register');
@@ -145,7 +160,7 @@ describe('test register',() => {
         cy.url().should('include', '/register');
         cy.get('#first-name').type('Marko');
         cy.get('#last-name').type('Markoni');
-        cy.get('#email').type('alexalexjason70@gmail.com');
+        cy.get('#email').type(randomEmail);
         cy.get('#password').type('markomare23');
         cy.get('#password-confirmation').type('markomare23');
         cy.get('[type="checkbox"]').check();

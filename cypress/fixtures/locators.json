@@ -1,0 +1,22 @@
+{
+    "Login":{
+        "emailInput":"#email",
+        "passInput":"#password",
+        "submitBtn":"button[type='submit']"
+    },
+
+    "registration":{
+        "firstName":"#first-name",
+        "lastName":"#last-name",
+        "email":"#email",
+        "pass":"#password",
+        "passConfirmation":"#password-confirmation",
+        "termsAndConditions":"[type='checkbox']",
+        "submitBtn":"button[type='submit']"
+    },
+
+    "logout":{
+        "logoutBtn":"a[class='nav-link nav-buttons']"
+    }
+    
+}
