@@ -25,15 +25,15 @@ class CreateGallery{
         return cy.get('button[type="submit"],[1]');
     }
 
-    createGallery(title,description,image,addImage,up,down,submit,cancel){
+    createGallery(title,description,image){
         this.titleField.type(title);
         this.descriptionField.type(description);
         this.imageField.type(image);
-        this.addImageBtn.type(addImage);
-        this.arrowUp.type(up);
-        this.arrowDown.type(down);
-        this.submitBtn.type(submit);
-        this.cancelBtn.type(cancel);
+        this.addImageBtn.click();
+        this.arrowUp.click();
+        this.arrowDown.click();
+        this.submitBtn.click();
+        this.cancelBtn.click();
     }
 }
 
