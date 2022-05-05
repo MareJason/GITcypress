@@ -27,6 +27,9 @@ class CreateGallery{
     get createGalleryHeading() {
         return cy.get('h1');
     }
+    get errorMsg() {
+        return cy.get('p[class="alert alert-danger"]');
+     }
 
     createGalleryFunction(title,description,image){
         this.titleField.type(title);
