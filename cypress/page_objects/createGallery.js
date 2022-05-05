@@ -7,34 +7,35 @@ class CreateGallery{
         return cy.get('#description');
     }
     get imageField() {
-        return cy.get('.form-control');
-    }
-    get addImageBtn() {
-        return cy.get('button[type="button"]');
+        return cy.get('.form-control').eq(2);
     }
     get arrowUp() {
-        return cy.get('.fas fa-chevron-circle-up,[0]');
+        return cy.get('button').eq(0);
     }
     get arrowDown() {
-        return cy.get('.fas fa-chevron-circle-up,[1]');
+        return cy.get('button').eq(1);
+    }
+    get addImageBtn() {
+        return cy.get('button').eq(2);
     }
     get submitBtn() {
-        return cy.get('button[type="submit"],[0]');
+        return cy.get('.btn').first();
     }
     get cancelBtn() {
-        return cy.get('button[type="submit"],[1]');
+        return cy.get('.btn').last();
+    }
+    get createGalleryHeading() {
+        return cy.get('h1');
     }
 
-    createGallery(title,description,image){
+    createGalleryFunction(title,description,image){
         this.titleField.type(title);
         this.descriptionField.type(description);
         this.imageField.type(image);
-        this.addImageBtn.click();
-        this.arrowUp.click();
         this.arrowDown.click();
+        this.addImageBtn.click();
         this.submitBtn.click();
-        this.cancelBtn.click();
     }
 }
 
-export const crtGallery = new CreateGallery();
+export const createGallery = new CreateGallery();

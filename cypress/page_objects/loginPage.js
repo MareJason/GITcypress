@@ -12,6 +12,14 @@ class LoginPage{
        return cy.get('button[type="submit"]');
     }
 
+    get loginHeading() {
+       return cy.get('h1');
+    }
+
+    get errorMsg() {
+       return cy.get('p[class="alert alert-danger"]');
+    }
+
     login(email,pass) {
         this.emailInput.type(email)
         this.passwordInput.type(pass)

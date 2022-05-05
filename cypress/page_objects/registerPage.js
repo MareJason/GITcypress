@@ -28,6 +28,13 @@ class RegisterPage{
         return cy.get('button[type="submit"]');
      }
 
+     get registerHeading() {
+        return cy.get('h1');
+     }
+     get errMsg() {
+        return cy.get('p[class="alert alert-danger"]');
+     }
+
      register(firstName, lastName, email, pass) {
          this.firstName.type(firstName);
          this.lastName.type(lastName);
