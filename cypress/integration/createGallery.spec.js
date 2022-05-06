@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import { loginPage } from '../page_objects/loginPage';
-import { createGallery, crtGallery } from '../page_objects/createGallery';
+import { createGallery } from '../page_objects/createGallery';
 
 describe('Create gallery page test', () => {
 
@@ -10,13 +10,13 @@ describe('Create gallery page test', () => {
         loginPage.emailInput.type('alexalexjason70@gmail.com');
         loginPage.passwordInput.type('mareljapk23');
         loginPage.submitBtn.click();
-        cy.wait(1000);
+        cy.get('h1').should('have.text', 'All Galleries')
         cy.visit('/create');
         /*imao sam problem sa ucitavanjem stranice pa sam iz tog
         razloga stavio cy.wait(1000)*/
     })
 
-    it('validate CG page', () => {
+    it('validate Create Gallery page', () => {
         createGallery.createGalleryHeading
         .should('be.visible')
         .and('have.text','Create Gallery');
@@ -104,9 +104,61 @@ describe('Create gallery page test', () => {
         cy.url().should('include','/create')
     })
 
+    it('creating gallery with two images at the same time', () => {
+        createGallery.titleField.type('some text');
+        createGallery.descriptionField.type('some desription');
+        createGallery.imageField.type('https://m.faz.net/media1/ppmedia/aktuell/491758916/1.7389103/mmobject-still_full/eine-nummer-schneller.jpg');
+        createGallery.addImageBtn.click();
+        createGallery.image2Field.type('https://s3.eu-central-1.amazonaws.com/stern-nl/01/giulia-leasen-1.jpg');
+        createGallery.submitBtn.click();
+        cy.url().should("not.include", "/create");
+    })
+
+    it('deleting first image', () => {
+        createGallery.titleField.type('some text');
+        createGallery.descriptionField.type('some description');
+        createGallery.imageField.type('https://m.faz.net/media1/ppmedia/aktuell/491758916/1.7389103/mmobject-still_full/eine-nummer-schneller.jpg');
+        createGallery.addImageBtn.click();
+        createGallery.image2Field.type('https://s3.eu-central-1.amazonaws.com/stern-nl/01/giulia-leasen-1.jpg');
+        createGallery.deleteImage.first().find('button').first().click();
+        cy.get('.input').should('have.length', 0);
+        createGallery.submitBtn.click();
+        cy.url().should("not.include", "/create");
+    })
+
+    it('move first image down',() =>{
+        createGallery.titleField.type('some text');
+        createGallery.descriptionField.type('some description');
+        createGallery.imageField.type('https://m.faz.net/media1/ppmedia/aktuell/491758916/1.7389103/mmobject-still_full/eine-nummer-schneller.jpg');
+        createGallery.addImageBtn.click();
+        createGallery.image2Field.type('https://s3.eu-central-1.amazonaws.com/stern-nl/01/giulia-leasen-1.jpg');
+        createGallery.arrowDown.find('button').eq(2).click();
+        createGallery.submitBtn.click();
+        cy.url().should("not.include", "/create")
+     })
+
+    it('move second image up',() =>{
+        createGallery.titleField.type('some text');
+        createGallery.descriptionField.type('some description');
+        createGallery.imageField.type('https://m.faz.net/media1/ppmedia/aktuell/491758916/1.7389103/mmobject-still_full/eine-nummer-schneller.jpg');
+        createGallery.addImageBtn.click();
+        createGallery.image2Field.type('https://s3.eu-central-1.amazonaws.com/stern-nl/01/giulia-leasen-1.jpg');
+        createGallery.arrowUp.find('button').eq(1).click();
+        createGallery.submitBtn.click();
+        cy.url().should("not.include", "/create")
+     })
+
+     it('check if cancel button works',() =>{
+        createGallery.titleField.type('some text');
+        createGallery.descriptionField.type('some description');
+        createGallery.imageField.type('https://s3.eu-central-1.amazonaws.com/stern-nl/01/giulia-leasen-1.jpg');
+        createGallery.cancelBtn.click();
+        cy.url().should("include", "/")
+     })
+
    it('Create Gallery with valid data', () => {
     cy.visit('/create');
-    createGallery.titleField.type('Alfa Rome Giulia');
+    createGallery.titleField.type('Alfa Romeo Giulia');
     createGallery.descriptionField.type('Fast and elegant at the same time');
     createGallery.imageField.type('https://m.faz.net/media1/ppmedia/aktuell/491758916/1.7389103/mmobject-still_full/eine-nummer-schneller.jpg');
     createGallery.submitBtn.click();

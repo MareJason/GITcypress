@@ -9,11 +9,14 @@ class CreateGallery{
     get imageField() {
         return cy.get('.form-control').eq(2);
     }
+    get image2Field() {
+        return cy.get('input').last();
+    }
     get arrowUp() {
-        return cy.get('button').eq(0);
+        return cy.get('.input-group-append').last();
     }
     get arrowDown() {
-        return cy.get('button').eq(1);
+        return cy.get('.input-group-append').first();
     }
     get addImageBtn() {
         return cy.get('button').eq(2);
@@ -29,13 +32,15 @@ class CreateGallery{
     }
     get errorMsg() {
         return cy.get('p[class="alert alert-danger"]');
-     }
+    }
+     get deleteImage() {
+        return cy.get('.input-group-append');     
+    }
 
-    createGalleryFunction(title,description,image){
+    createGallery(title,description,image){
         this.titleField.type(title);
         this.descriptionField.type(description);
         this.imageField.type(image);
-        this.arrowDown.click();
         this.addImageBtn.click();
         this.submitBtn.click();
     }
