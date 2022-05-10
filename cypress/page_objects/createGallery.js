@@ -41,7 +41,6 @@ class CreateGallery{
         this.titleField.type(title);
         this.descriptionField.type(description);
         this.imageField.type(image);
-        this.addImageBtn.click();
         this.submitBtn.click();
     }
 }
